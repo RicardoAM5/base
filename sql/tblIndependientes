@@ -1,0 +1,13 @@
+-- Historico de precios
+
+CREATE TABLE tblIndependientes (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    id_bobina INT NOT NULL,
+    id_proveedor INT NOT NULL,
+    nombre VARCHAR(100) NOT NULL,
+    descripcion TEXT,
+    precio DECIMAL(10, 2) NOT NULL,
+    fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (id_bobina) REFERENCES tblBobinas(id_bobina),
+    FOREIGN KEY (id_proveedor) REFERENCES tblProveedores(id_proveedor
+);
