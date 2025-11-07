@@ -1,5 +1,8 @@
 package com.ram.base.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,12 +21,15 @@ public class ClaseEntity {
     @Id
     @Column(name = "id_clase")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private Long id_clase;
 
     @Column(unique = true)
     private String clase;
 
     @OneToMany(mappedBy = "claseEntity")
+    @JsonIgnore
+    @Schema(hidden = true)
     private List<BobinaCompraEntity> bobinas;
 
 

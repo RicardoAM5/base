@@ -1,6 +1,8 @@
 package com.ram.base.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -27,6 +29,8 @@ public class TipoEntity {
 
 
     @OneToMany(mappedBy = "tipoEntity")
+    @JsonIgnore
+    @Schema(hidden = true)
     private List<BobinaCompraEntity> bobinas;
 
 

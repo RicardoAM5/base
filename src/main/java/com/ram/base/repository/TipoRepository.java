@@ -4,6 +4,6 @@ import com.ram.base.entity.TipoEntity;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class TipoRepository extends BaseRepository <TipoEntity, Long> {
+public interface TipoRepository extends BaseRepository <TipoEntity, Long> {
 
 }
