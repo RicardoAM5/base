@@ -1,7 +1,7 @@
 package com.ram.base.config;
 
 import com.ram.base.filter.JwtRequestFilter;
-import com.ram.base.service.AppUserDetailsService;
+import com.ram.base.service.generic.AppUserDetailsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -40,7 +40,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/login", "/register", "/send-reset-otp", "/reset-password", "/logout",
                                 "/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html",
-                                "/tipo/**") // TEMPORAL: Para pruebas - Remover en producción
+                                "/tipo/**", "/localidades/**", "/areas/**") // TEMPORAL: Para pruebas - Remover en producción
                         .permitAll().anyRequest().authenticated())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .logout(AbstractHttpConfigurer::disable)

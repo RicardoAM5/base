@@ -1,6 +1,6 @@
 package com.ram.base.filter;
 
-import com.ram.base.service.AppUserDetailsService;
+import com.ram.base.service.generic.AppUserDetailsService;
 import com.ram.base.util.JwtUtil;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
