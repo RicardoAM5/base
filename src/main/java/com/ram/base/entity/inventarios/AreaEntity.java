@@ -29,7 +29,6 @@ import lombok.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(description = "Entidad que representa un área o sección dentro de una localidad")
 public class AreaEntity {
 
     @Id
@@ -39,8 +38,8 @@ public class AreaEntity {
     private Long idArea;
 
     @NotBlank(message = "El nombre del área es obligatorio")
-    @Size(min = 2, max = 100, message = "El nombre debe tener entre 2 y 100 caracteres")
-    @Column(name = "nombre", nullable = false, length = 100)
+    @Size(min = 2, max = 500, message = "El nombre debe tener entre 2 y 500 caracteres")
+    @Column(name = "nombre", nullable = false, length = 500)
     private String nombre;
 
     @NotNull(message = "La localidad es obligatoria")
@@ -79,7 +78,6 @@ public class AreaEntity {
 
     //Por esto se usa getClass().hashCode() para evitar problemas con proxies de Hibernate
     // Es una práctica recomendada en entidades JPA
-
     @Override
     public int hashCode() {
         return getClass().hashCode();

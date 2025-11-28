@@ -17,17 +17,6 @@ public class LocalidadMapper {
     /**
      * Convierte LocalidadEntity (modelo de base de datos) a LocalidadDTO (modelo de API)
      * 
-     * ¿Por qué usar DTOs en lugar de exponer Entities directamente?
-     * 1. SEGURIDAD: Controlas exactamente qué campos se exponen (no expones IDs internos)
-     * 2. DESACOPLAMIENTO: Puedes cambiar la BD sin afectar el API
-     * 3. PERFORMANCE: Evitas lazy loading exceptions en JSON serialization
-     * 4. FLEXIBILIDAD: Puedes combinar datos de múltiples entidades
-     * 
-     * Este método:
-     * - Usa Builder pattern de Lombok para código limpio
-     * - Convierte la lista de áreas usando Stream API
-     * - Maneja null safety (si no hay áreas, retorna null en lugar de error)
-     * 
      * @param entity Entidad de base de datos (puede incluir lazy-loaded areas)
      * @return DTO listo para serializar a JSON
      */
@@ -40,10 +29,9 @@ public class LocalidadMapper {
                 .idLocalidad(entity.getIdLocalidad())
                 .nombre(entity.getNombre())
                 .estatus(entity.getEstatus())
-                // Convierte List<AreaEntity> a List<AreaDTO> usando Stream API
                 .areas(entity.getAreas() != null ? 
                     entity.getAreas().stream()
-                        .map(this::areaToDTO)  // Method reference: más limpio que lambda
+                        .map(this::areaToDTO)  
                         .collect(Collectors.toList()) : 
                     null)
                 .build();

@@ -43,13 +43,7 @@ public class AreaController {
             summary = "Crear nueva área",
             description = "Crea una nueva área. DEBE estar asociada a una localidad existente (obligatorio)."
     )
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Área creada exitosamente",
-                    content = @Content(schema = @Schema(implementation = AreaDTO.class))),
-            @ApiResponse(responseCode = "400", description = "Datos inválidos o área duplicada en la localidad"),
-            @ApiResponse(responseCode = "404", description = "Localidad no encontrada"),
-            @ApiResponse(responseCode = "500", description = "Error interno del servidor")
-    })
+
     public ResponseEntity<AreaDTO> create(
             @Parameter(description = "Datos del área a crear", required = true)
             @Valid @RequestBody CreateAreaRequest request) {
@@ -65,18 +59,13 @@ public class AreaController {
             summary = "Actualizar área",
             description = "Actualiza los datos de un área existente. No se puede cambiar la localidad."
     )
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Área actualizada exitosamente"),
-            @ApiResponse(responseCode = "404", description = "Área no encontrada"),
-            @ApiResponse(responseCode = "400", description = "Datos inválidos"),
-            @ApiResponse(responseCode = "500", description = "Error interno del servidor")
-    })
+
     public ResponseEntity<AreaDTO> update(
             @Parameter(description = "ID del área", required = true, example = "1")
             @PathVariable Long id,
             @Parameter(description = "Datos actualizados", required = true)
             @Valid @RequestBody AreaDTO areaDTO) {
-        
+
         log.info("PUT /areas/{} - Actualizando área", id);
         AreaDTO updated = areaService.update(id, areaDTO);
         return ResponseEntity.ok(updated);
@@ -87,11 +76,7 @@ public class AreaController {
             summary = "Obtener área por ID",
             description = "Retorna los detalles de un área específica incluyendo datos de su localidad"
     )
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Área encontrada"),
-            @ApiResponse(responseCode = "404", description = "Área no encontrada"),
-            @ApiResponse(responseCode = "500", description = "Error interno del servidor")
-    })
+  
     public ResponseEntity<AreaDTO> getById(
             @Parameter(description = "ID del área", required = true, example = "1")
             @PathVariable Long id) {
@@ -106,10 +91,7 @@ public class AreaController {
             summary = "Obtener todas las áreas",
             description = "Retorna una lista de todas las áreas sin paginación"
     )
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Lista obtenida exitosamente"),
-            @ApiResponse(responseCode = "500", description = "Error interno del servidor")
-    })
+
     public ResponseEntity<List<AreaDTO>> getAll() {
         log.info("GET /areas - Obteniendo todas las áreas");
         List<AreaDTO> areas = areaService.getAll();
@@ -121,10 +103,7 @@ public class AreaController {
             summary = "Obtener áreas paginadas",
             description = "Retorna áreas con paginación, ordenamiento y filtros"
     )
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Página obtenida exitosamente"),
-            @ApiResponse(responseCode = "500", description = "Error interno del servidor")
-    })
+
     public ResponseEntity<Page<AreaDTO>> getAllPaginated(
             @Parameter(description = "Configuración de paginación")
             @PageableDefault(size = 10, sort = "nombre", direction = Sort.Direction.ASC) Pageable pageable) {
@@ -140,11 +119,6 @@ public class AreaController {
             summary = "Obtener áreas por localidad",
             description = "Retorna todas las áreas pertenecientes a una localidad específica"
     )
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Lista obtenida exitosamente"),
-            @ApiResponse(responseCode = "404", description = "Localidad no encontrada"),
-            @ApiResponse(responseCode = "500", description = "Error interno del servidor")
-    })
     public ResponseEntity<List<AreaDTO>> getByLocalidad(
             @Parameter(description = "ID de la localidad", required = true, example = "1")
             @PathVariable Long idLocalidad) {
@@ -159,10 +133,7 @@ public class AreaController {
             summary = "Obtener áreas activas",
             description = "Retorna solo las áreas con estatus activo"
     )
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Lista obtenida exitosamente"),
-            @ApiResponse(responseCode = "500", description = "Error interno del servidor")
-    })
+
     public ResponseEntity<List<AreaDTO>> getActive() {
         log.info("GET /areas/activas - Obteniendo áreas activas");
         List<AreaDTO> activas = areaService.getActive();
@@ -192,11 +163,7 @@ public class AreaController {
             summary = "Activar área",
             description = "Cambia el estatus del área a activo"
     )
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Área activada exitosamente"),
-            @ApiResponse(responseCode = "404", description = "Área no encontrada"),
-            @ApiResponse(responseCode = "500", description = "Error interno del servidor")
-    })
+
     public ResponseEntity<AreaDTO> activate(
             @Parameter(description = "ID del área", required = true, example = "1")
             @PathVariable Long id) {
@@ -211,11 +178,7 @@ public class AreaController {
             summary = "Desactivar área",
             description = "Cambia el estatus del área a inactivo"
     )
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Área desactivada exitosamente"),
-            @ApiResponse(responseCode = "404", description = "Área no encontrada"),
-            @ApiResponse(responseCode = "500", description = "Error interno del servidor")
-    })
+
     public ResponseEntity<AreaDTO> deactivate(
             @Parameter(description = "ID del área", required = true, example = "1")
             @PathVariable Long id) {
@@ -254,10 +217,7 @@ public class AreaController {
             summary = "Contar áreas por localidad",
             description = "Retorna el número total de áreas en una localidad específica"
     )
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Conteo completado exitosamente"),
-            @ApiResponse(responseCode = "500", description = "Error interno del servidor")
-    })
+        
     public ResponseEntity<Map<String, Long>> countByLocalidad(
             @Parameter(description = "ID de la localidad", required = true, example = "1")
             @PathVariable Long idLocalidad) {

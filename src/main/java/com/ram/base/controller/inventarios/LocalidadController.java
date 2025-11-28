@@ -42,12 +42,7 @@ public class LocalidadController {
             summary = "Crear nueva localidad",
             description = "Crea una nueva localidad. Puede incluir áreas asociadas o crearse sin áreas."
     )
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Localidad creada exitosamente",
-                    content = @Content(schema = @Schema(implementation = LocalidadDTO.class))),
-            @ApiResponse(responseCode = "400", description = "Datos inválidos o localidad duplicada"),
-            @ApiResponse(responseCode = "500", description = "Error interno del servidor")
-    })
+
     public ResponseEntity<LocalidadDTO> create(
             @Parameter(description = "Datos de la localidad a crear", required = true)
             @Valid @RequestBody LocalidadDTO localidadDTO) {
@@ -62,12 +57,7 @@ public class LocalidadController {
             summary = "Actualizar localidad",
             description = "Actualiza los datos de una localidad existente"
     )
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Localidad actualizada exitosamente"),
-            @ApiResponse(responseCode = "404", description = "Localidad no encontrada"),
-            @ApiResponse(responseCode = "400", description = "Datos inválidos"),
-            @ApiResponse(responseCode = "500", description = "Error interno del servidor")
-    })
+
     public ResponseEntity<LocalidadDTO> update(
             @Parameter(description = "ID de la localidad", required = true, example = "1")
             @PathVariable Long id,
@@ -84,11 +74,6 @@ public class LocalidadController {
             summary = "Obtener localidad por ID",
             description = "Retorna los detalles de una localidad específica incluyendo sus áreas"
     )
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Localidad encontrada"),
-            @ApiResponse(responseCode = "404", description = "Localidad no encontrada"),
-            @ApiResponse(responseCode = "500", description = "Error interno del servidor")
-    })
     public ResponseEntity<LocalidadDTO> getById(
             @Parameter(description = "ID de la localidad", required = true, example = "1")
             @PathVariable Long id) {
@@ -103,10 +88,6 @@ public class LocalidadController {
             summary = "Obtener todas las localidades",
             description = "Retorna una lista de todas las localidades sin paginación"
     )
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Lista obtenida exitosamente"),
-            @ApiResponse(responseCode = "500", description = "Error interno del servidor")
-    })
     public ResponseEntity<List<LocalidadDTO>> getAll() {
         log.info("GET /localidades - Obteniendo todas las localidades");
         List<LocalidadDTO> localidades = localidadService.getAll();
@@ -118,10 +99,7 @@ public class LocalidadController {
             summary = "Obtener localidades paginadas",
             description = "Retorna localidades con paginación, ordenamiento y filtros"
     )
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Página obtenida exitosamente"),
-            @ApiResponse(responseCode = "500", description = "Error interno del servidor")
-    })
+
     public ResponseEntity<Page<LocalidadDTO>> getAllPaginated(
             @Parameter(description = "Configuración de paginación")
             @PageableDefault(size = 10, sort = "nombre", direction = Sort.Direction.ASC) Pageable pageable) {
@@ -137,10 +115,7 @@ public class LocalidadController {
             summary = "Obtener localidades activas",
             description = "Retorna solo las localidades con estatus activo"
     )
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Lista obtenida exitosamente"),
-            @ApiResponse(responseCode = "500", description = "Error interno del servidor")
-    })
+
     public ResponseEntity<List<LocalidadDTO>> getActive() {
         log.info("GET /localidades/activas - Obteniendo localidades activas");
         List<LocalidadDTO> activas = localidadService.getActive();
@@ -152,10 +127,7 @@ public class LocalidadController {
             summary = "Buscar localidades por nombre",
             description = "Busca localidades cuyo nombre contenga el texto especificado (case insensitive)"
     )
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Búsqueda completada exitosamente"),
-            @ApiResponse(responseCode = "500", description = "Error interno del servidor")
-    })
+
     public ResponseEntity<List<LocalidadDTO>> searchByNombre(
             @Parameter(description = "Texto a buscar en el nombre", required = true, example = "México")
             @RequestParam String nombre) {
@@ -170,11 +142,7 @@ public class LocalidadController {
             summary = "Activar localidad",
             description = "Cambia el estatus de la localidad a activo"
     )
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Localidad activada exitosamente"),
-            @ApiResponse(responseCode = "404", description = "Localidad no encontrada"),
-            @ApiResponse(responseCode = "500", description = "Error interno del servidor")
-    })
+
     public ResponseEntity<LocalidadDTO> activate(
             @Parameter(description = "ID de la localidad", required = true, example = "1")
             @PathVariable Long id) {
@@ -189,11 +157,6 @@ public class LocalidadController {
             summary = "Desactivar localidad",
             description = "Cambia el estatus de la localidad a inactivo"
     )
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Localidad desactivada exitosamente"),
-            @ApiResponse(responseCode = "404", description = "Localidad no encontrada"),
-            @ApiResponse(responseCode = "500", description = "Error interno del servidor")
-    })
     public ResponseEntity<LocalidadDTO> deactivate(
             @Parameter(description = "ID de la localidad", required = true, example = "1")
             @PathVariable Long id) {
@@ -208,11 +171,6 @@ public class LocalidadController {
             summary = "Eliminar localidad",
             description = "Elimina lógicamente una localidad (soft delete, la desactiva)"
     )
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Localidad eliminada exitosamente"),
-            @ApiResponse(responseCode = "404", description = "Localidad no encontrada"),
-            @ApiResponse(responseCode = "500", description = "Error interno del servidor")
-    })
     public ResponseEntity<Map<String, String>> delete(
             @Parameter(description = "ID de la localidad", required = true, example = "1")
             @PathVariable Long id) {
@@ -232,10 +190,7 @@ public class LocalidadController {
             summary = "Verificar si existe localidad",
             description = "Verifica si existe una localidad con el nombre especificado"
     )
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Verificación completada"),
-            @ApiResponse(responseCode = "500", description = "Error interno del servidor")
-    })
+
     public ResponseEntity<Map<String, Boolean>> existsByNombre(
             @Parameter(description = "Nombre a verificar", required = true, example = "Ciudad de México")
             @RequestParam String nombre) {
