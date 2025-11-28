@@ -1,0 +1,34 @@
+package com.ram.base.dto.productos;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+/**
+ * DTO para transferencia de datos de Tipo
+ */
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Schema(description = "Datos de un tipo de producto")
+public class TipoDTO {
+
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    @Schema(description = "ID único del tipo", example = "1")
+    private Long idTipo;
+
+    @NotBlank(message = "El nombre del tipo es obligatorio")
+    @Size(min = 2, max = 100, message = "El nombre debe tener entre 2 y 100 caracteres")
+    @Schema(description = "Nombre del tipo", example = "Tipo A")
+    private String tipo;
+
+    @Builder.Default
+    @Schema(description = "Estado del tipo", example = "true")
+    private Boolean estatus = true;
+}

@@ -30,7 +30,7 @@ public class ClaseEntity {
     @OneToMany(mappedBy = "claseEntity")
     @JsonIgnore
     @Schema(hidden = true)
-    private List<BobinaCompraEntity> bobinas;
+    private List<BobinaEntity> bobinas;
 
 
     private boolean estatus;

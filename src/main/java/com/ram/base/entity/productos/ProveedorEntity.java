@@ -1,16 +1,13 @@
-package com.ram.base.entity.compras;
+package com.ram.base.entity.productos;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.ram.base.entity.productos.BobinaCompraEntity;
-import io.swagger.v3.oas.annotations.media.Schema;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
 
 @Data
 @Builder
@@ -37,11 +34,7 @@ public class ProveedorEntity {
     private Boolean estatus;
 
 
-    @OneToMany ( targetEntity = BobinaCompraEntity.class, mappedBy = "proveedor", fetch = FetchType.LAZY)
-    @JsonIgnore
-    @Schema(hidden = true)
-    private List<BobinaCompraEntity> bobinasCompradas;
-
+ 
 
 }
 
